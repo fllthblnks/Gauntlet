@@ -46,7 +46,7 @@ sub handle_request {
 
     print "GAUNTLET: A test which you might not survive. v$version<br><br>";
 
-    print 'Written by Guillaume Germain (<a href="mailto:ggermain@hpe.com">ggermain@hpe.com</a>)<br><br>';
+    print 'Written by Guillaume Germain<br>';
  
     # Currently unsupported. Use the command-line tool to start tests
 
@@ -174,7 +174,7 @@ sub resp_display {
 
    # Display Header
    $out = '<font size="-3">';
-   $out .= "Test description: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a><br>\n";
+   $out .= "Test type: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a><br>\n";
    $out .= "<table border=0 cellspacing=1 cellpadding=0>\n";
    $out .= "<tr><td>SEC</td>";
    
@@ -340,7 +340,7 @@ sub print_header(){
 EOF
 
 
-		if($refresh ne "autoupdate"){ #$out .= '<META HTTP-EQUIV="refresh" CONTENT="1">';
+		if($refesh ne "autoupdate"){ #$out .= '<META HTTP-EQUIV="refresh" CONTENT="1">';
 		}
 
 	$out .= <<EOF;
@@ -356,4 +356,7 @@ EOF
 
 # start the server on port 8081
 my $pid = MyWebServer->new(8081)->background();
-print "Gauntlet v$version web server running.\n\nUse 'kill $pid' to stop server.\n";
+print "Gauntlet v$version web server running.\n\nUse './stop_webserver.sh' to stop server.\n";
+open(PID, '>.webserver.pid');
+print PID $pid;
+close(PID);
