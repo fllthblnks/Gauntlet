@@ -7,7 +7,7 @@
 # Host discovery is done by scanning the network for the INIT_PORT using nmap. 
 # One or the other needs to be used.
 # scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254 
-NETWORK_TO_SCAN			= 192.168.10.103-174
+NETWORK_TO_SCAN		= 192.168.10.103-174
 #HOST_FILE			= host_list.txt
 
 # Only start iperf on the client, no need to install the client
@@ -68,4 +68,4 @@ MAX_TIMEOUT                       = 30
 IPERF_PORT                        = 5005
 INIT_PORT                         = 51091
 REPORTING_PORT                    = 51095
-
+IPERF_PATH                        = ./iperf_osx

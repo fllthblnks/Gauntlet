@@ -50,6 +50,10 @@ foreach my $line (<FIC>){
 }
 close(FIC);
 
+if defined($params{IPERF_PATH}){
+    $IPERF_PATH = $params{IPERF_PATH};
+}
+
 if($ARGV[0] ne "-c"){
   $params{NETWORK_TO_SCAN}          = $ARGV[0];
   $params{TEST_TYPE}                = $ARGV[1];

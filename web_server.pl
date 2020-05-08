@@ -174,7 +174,7 @@ sub resp_display {
 
    # Display Header
    $out = '<font size="-3">';
-   $out .= "Test type: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a><br>\n";
+   $out .= "Test description: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a><br>\n";
    $out .= "<table border=0 cellspacing=1 cellpadding=0>\n";
    $out .= "<tr><td>SEC</td>";
    
@@ -340,7 +340,7 @@ sub print_header(){
 EOF
 
 
-		if($refesh ne "autoupdate"){ #$out .= '<META HTTP-EQUIV="refresh" CONTENT="1">';
+		if($refresh ne "autoupdate"){ #$out .= '<META HTTP-EQUIV="refresh" CONTENT="1">';
 		}
 
 	$out .= <<EOF;
