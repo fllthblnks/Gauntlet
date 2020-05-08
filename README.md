@@ -12,7 +12,7 @@ It can either be ran in client-mode (requires a client to be installed on the en
 
 It uses nmap for the endpoint discovery, runs the test applications and then displays the test results using a web interface.
 
-[Display Example](/sample.png)
+![Display Example](/sample.png)
 
 ## How to install it?
 
