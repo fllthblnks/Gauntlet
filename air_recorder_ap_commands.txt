@@ -1,0 +1,1 @@
+1,cat /proc/1/net/asap_wifi0/drop-list

@@ -1,0 +1,109 @@
+#!/usr/bin/perl
+# Author: Guillaume Germain (ggermain@arubanetworks.com)
+# Date: 2014/06/18
+# Description: tails AirRecorder files and inserts it into a MySQL DB
+
+use strict;
+
+package MCTTE::AirRecAPProc;
+
+sub new{
+  my $class = shift;
+  my (%data, @time);
+
+  my $self = { file    => shift,
+               data    => %data,
+	       time    => @time};
+
+
+  my $tmp;
+  my @tmp_command; 
+
+  open(FIC, $self->{file}) or die "OPENING FILE ERROR " . $self->{file};
+  while(<FIC>){
+    if($_ =~ /\.\.\.\.\./){
+      &process_command($self, \@tmp_command);
+      @tmp_command = [];
+    }else{
+      $tmp = $_;
+      $tmp =~ s/\n//;
+      $tmp =~ s/\r//;
+      push(@tmp_command, $tmp)
+    }
+  }
+  close(FIC);
+  
+  bless $self, $class;
+  return $self;
+}
+
+sub getArgumentList{
+  my ($self) = @_;
+  
+  return keys %{$self->{data}};
+}
+
+
+sub getTime{
+  my ($self, $time_data) = @_;
+
+  my $time_val = 0;
+
+  my %cmd_out = %{$self->{cmd_out}};
+  my @time    = @{$cmd_out{time}};
+ 
+  foreach my $time_key (@time){
+    if(abs($time_data - $time_key) < abs($time_data - $time_val)){
+      $time_val  = $time_key;
+    }
+  }
+
+  return $time_val;
+}
+
+sub getData{
+  my ($self, $time_data, $arg) = @_;
+
+  return $self->{cmd_out}->{$arg}{$time_data};
+}
+
+sub process_command{
+  my ($self, $arr_ref) = @_;
+  my %command_data;
+  my @t = @$arr_ref;
+  
+  shift(@t);  
+  
+  while($t[0] =~ /^\/\/\/\/\//){
+    my $l = shift(@t);
+    $l =~ s/^\/\/\/\/\/ //;
+    if(!defined($l) or $l eq ""){ next; }
+    my @p = split(':\ ', $l);
+    $command_data{$p[0]} = $p[1];
+  } 
+
+
+  $command_data{"LocalBeginTime"} =~ /^(\w+)/;
+  $command_data{"LocalBeginTime"} =  $1;
+  $command_data{"LocalBeginTime"} =~ s/([0-9]{10})/$1\./;
+
+  $command_data{"LocalEndTime"}  =~ /^(\w+)/;
+  $command_data{"LocalEndTime"} =   $1;
+  
+  push(@{$self->{time}}, $command_data{"LocalBeginTime"});
+
+  my %data = %{$self->{data}};
+
+  foreach my $line (@t){
+    my @tmp = split(": ", $line);
+    
+    $data{$tmp[0]}{$command_data{"LocalBeginTime"}} = $tmp[1];
+  }
+ 
+  $self->{data} = \%data; 
+}
+
+
+
+
+1;

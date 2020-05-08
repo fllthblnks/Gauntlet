@@ -1,0 +1,71 @@
+# Configuration file for GAUNTLET
+# Multi-client speed testing tool
+# Author: Guillaume Germain (ggermain@hpe.com) 
+#
+# This file holds the configuration for GAUNTLET
+
+# Host discovery is done by scanning the network for the INIT_PORT using nmap. 
+# One or the other needs to be used.
+# scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254 
+NETWORK_TO_SCAN			= 192.168.10.103-174
+#HOST_FILE			= host_list.txt
+
+# Only start iperf on the client, no need to install the client
+LITE_MODE			= YES
+
+# Supported test types IPERFTCP (TCP) or IPERFUDP (UDP)
+TEST_TYPE			= IPERFTCP
+
+# Test description, will be save in the result file so you remember what the test was
+AP_PARAM			= Android_phones_without_MUMI_on_315
+
+
+###########################
+###    IPERF OPTIONS    ###
+###########################
+
+# Specifies the windows size when in IPERFTCP mode (iperf option -w) or the bandwidth when in UDP mode (iperf option -b)
+WINDOW_SIZE_OR_BANDWIDTH	= 1M
+
+# Specifies iperf test duration in seconds (iperf option -t)
+TEST_DURATION			= 30
+
+# Specifies the number of parallel streams (iperf option -P)
+IPERF_STREAMS			= 2
+
+# For other test types... Requires the client, has not been tested in a long time and might be broken
+FTP_FILENAME			= ftp://192.168.1.6/getsmart.wmv
+TEST_START_DELAY		= 4
+#REPORTING_IP			= 192.168.3.41
+
+
+# AirRecorder integration
+# Useful to run troubleshooting commands during the test
+# Comment out the following lines to skip AirRecorder
+#ARUBA_CONTROLLER_IP		= 192.168.10.1
+#ARUBA_AP_IP			= 192.168.10.33
+#ARUBA_LOGIN			= admin
+#ARUBA_PASS			= Password
+#ARUBA_AIRREC_CONTROLLER_FILE	= air_recorder_commands.txt
+#ARUBA_AIRREC_AP_FILE		= air_recorder_ap_commands.txt
+
+
+# KairosDB for NetworkDashboard integration
+#KAIROSDB_IP			  = 10.32.5.216
+#KAIROSDB_PORT			  = 4224
+#KAIROSDB_PREFIX		  = gauntlet
+
+
+# You probably don't need to change anything under this line
+# Number of seconds between report intervals (iperf option -i). You probably want to leave this to 1 second.
+REPORT_INTERVAL                   = 1
+
+# Time to wait before test timeouts
+MAX_TIMEOUT                       = 30
+
+
+# Static config, should not change but if you do, it needs to be changed on the client side as well
+IPERF_PORT                        = 5005
+INIT_PORT                         = 51091
+REPORTING_PORT                    = 51095
+

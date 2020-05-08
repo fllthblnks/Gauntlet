@@ -1,0 +1,7 @@
+0,show ap active
+0,show ap association
+0,show user
+1,show ap debug client-table ap-name %{ap:name}
+1,show ap debug client-stats client-mac a4:d1:8c:ca:f2:3c advanced
+1,show ap debug radio-stats ap-name %{ap:name} radio 0 advanced
+

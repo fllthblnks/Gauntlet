@@ -1,2 +1,4 @@
 # Gauntlet
-Gauntlet: A test that you might not survive
+
+A test which you might not survive
+
