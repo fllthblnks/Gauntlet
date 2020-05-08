@@ -354,6 +354,6 @@ EOF
 }
 } 
 
-# start the server on port 8080
+# start the server on port 8081
 my $pid = MyWebServer->new(8081)->background();
 print "Gauntlet v$version web server running.\n\nUse 'kill $pid' to stop server.\n";
