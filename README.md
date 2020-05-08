@@ -22,6 +22,7 @@ Installation steps:
 1. Install nmap 
 1. Install the required modules using the ./install_modules.sh script
 1. Edit the config.txt file
+1. If you wish to use AirRecorder to run commands on the controller while the test is running, copy the JAR file into a folder named /lib and configure the config.txt file for it
 
 ## How to run it?
 
