@@ -22,3 +22,18 @@ Installation steps:
 1. Install nmap 
 1. Install the required modules using the ./install_modules.sh script
 1. Edit the config.txt file
+
+## How to run it?
+
+To run in iperf-lite mode:
+1. Start the reporting server with ./start_webserver.sh
+1. Make sure the endpoints are reachable by the Gauntlet server
+  * If on WiFi, make sure they are associated and able to reach the server
+1. Install and run iperf on the endpoints in server mode
+  * For a TCP test, use: iperf -s -i
+  * For a UDP test, use: iperf -s -u -i 1
+1. Configure the config.txt
+1. Start the test with perl run_the_gauntlet.pl -c
+
+You can view the results on the webserver by visiting http://localhost:8081/
+
