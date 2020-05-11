@@ -46,7 +46,11 @@ sub handle_request {
 
     print "GAUNTLET: A test which you might not survive. v$version<br><br>";
 
-    print 'Written by Guillaume Germain<br>';
+    print 'Written by Guillaume Germain<br><br><br>';
+
+    print '<font color="fushcia">300M</font> denotes a speed (in this case 300Mbps)<br>';
+    
+    print '<font color="aqua">300M</font> denotes a quantity of data (in this case 300 MB)';
  
     # Currently unsupported. Use the command-line tool to start tests
 
@@ -185,7 +189,7 @@ sub resp_display {
    }
   
 
-   $out .= "<td>TOTAL</td><td>AVG</td><td>&sigma;</td></tr>\n";
+   $out .= "<td>TOTAL</td><font color=\"aqua\"><td>AVG</td><td>&sigma;</td></tr>\n";
 
 
   # Display results for each time slice, including individual and total results
@@ -198,9 +202,9 @@ sub resp_display {
       
       $out .= "<td>" . &frmtSpeedColor($dataStruct->speedHostTime($host, $time_val)) . "&nbsp;</td>\n"; 
     }
-    $out .= "<td>" . &frmtSpeed($dataStruct->speedHostTime("aggregate", $time_val)) . "&nbsp;</td>\n";
-    $out .= "<td>" . &frmtSpeed($dataStruct->speedHostTime("aggregate", $time_val) / $dataStruct->getHostCount()) . "&nbsp;</td>\n"; 
-    $out .= "<td>" . &frmtSpeed($dataStruct->getStdrDerivByTime($time_val)) . "&nbsp;</td>\n";
+    $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->speedHostTime("aggregate", $time_val)) . "&nbsp;</td>\n";
+    $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->speedHostTime("aggregate", $time_val) / $dataStruct->getHostCount()) . "&nbsp;</td>\n"; 
+    $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->getStdrDerivByTime($time_val)) . "&nbsp;</td>\n";
     $out .= "</tr>\n";
   }
 
@@ -208,17 +212,17 @@ sub resp_display {
 
   ### Display Speed Avg for each host
   foreach my $hst (sort { $a cmp $b } $dataStruct->getHostList()){
-    $out .= "<td>" . &frmtSpeed($dataStruct->getSpeedAvg($hst)) . "</td>";
+    $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->getSpeedAvg($hst)) . "</font></td>";
   } 
-  $out .= "<td>" . &frmtSpeed($dataStruct->getSpeedAvg("TOTAL")) . "</td>";
-  $out .= "<td>" . &frmtSpeed($dataStruct->getStdrDerivTotalAvg()) . "</td></tr>";
+  $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->getSpeedAvg("TOTAL")) . "</font></td>";
+  $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->getStdrDerivTotalAvg()) . "</font></td></tr>";
  
   $out .= "<tr><td>&sigma;</td>";
   ### Display standard derivation
   foreach my $hst (sort { $a cmp $b } $dataStruct->getHostList()){
-    $out .= "<td>" . &frmtSpeed($dataStruct->getStdrDerivByHost($hst)) . "</td>";
+    $out .= "<td><font color=\"fushcia\">" . &frmtSpeed($dataStruct->getStdrDerivByHost($hst)) . "</font></td>";
   }
-
+  $out .= '</font>';
   $out .= "</tr><tr><td>DATA</td>";
 
   #### DATA SENT
@@ -226,12 +230,12 @@ sub resp_display {
 
   foreach my $hst (sort { $a cmp $b } $dataStruct->getHostList()){
 
-    $out .= "<td>" . &frmtSpeed($dataStruct->getHostTotal($hst)) . "</td>";
+    $out .= "<td><font color=\"aqua\">" . &frmtSpeed($dataStruct->getHostTotal($hst)) . "</font></td>";
   }
 
-  $out .= "<td>" . &frmtSpeed($dataStruct->getTotalData()) . "</td>";
+  $out .= "<td><font color=\"aqua\">" . &frmtSpeed($dataStruct->getTotalData()) . "</font></td>";
 
-  $out .= "<td>&nbsp;</td></tr></table>";
+  $out .= "<td>&nbsp;</td></tr></font></table>";
 
  
   print $out,

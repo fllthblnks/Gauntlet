@@ -1,5 +1,9 @@
 echo 'This will install the required modules for Gauntlet server on your computer.'
 echo 'The script will request your sudo password to install the scripts globally.'
+
+if MACOS then:
+xcode-select --install
+
 sudo cpan -I HTTP::Server::Simple::CGI
 sudo cpan -I POSIX
 sudo cpan -I IO::Socket::INET

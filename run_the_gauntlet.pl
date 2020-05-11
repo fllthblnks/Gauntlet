@@ -50,7 +50,7 @@ foreach my $line (<FIC>){
 }
 close(FIC);
 
-if defined($params{IPERF_PATH}){
+if(defined($params{IPERF_PATH})){
     $IPERF_PATH = $params{IPERF_PATH};
 }
 
