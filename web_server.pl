@@ -15,7 +15,8 @@ my $version = "1.10.1";
      '/host'	   => \&resp_host,
      '/start_test' => \&start_test,
      '/update'     => \&update,
-     '/ap_info'    => \&resp_apinfo
+     '/ap_info'    => \&resp_apinfo,
+     '/airrec'     => \&resp_airrec
 );
 
 my %test_values = ( IPERFTCP => "IPERF TCP",
@@ -111,11 +112,29 @@ sub start_test{
 
 }
 
+sub resp_airrec{
+  my $cgi  = shift;   # CGI.pm object
+  return if !ref $cgi;
+  my $out;
+
+    
+  my $dataStruct = Gauntlet::DataStruct->new("./speed_data_files/" . $cgi->param("file"));
+
+  open(FIC, "./airrec_logs/" . $dataStruct->getHeader()->{start_time} . "-controller.log-00.log");
+
+  print 'HTTP/1.0 200 OK\r\n';
+  print <FIC>;
+
+}
+
 
 sub resp_apinfo{
   my $cgi  = shift;   # CGI.pm object
   return if !ref $cgi;
   my $out;
+
+  my $dataStruct = Gauntlet::DataStruct->new("./speed_data_files/" . $cgi->param("file"));
+
 
   my $dataStruct = Gauntlet::DataStruct->new("./speed_data_files/" . $cgi->param("file"));
  #my $airrec     = Gauntlet::AirRecProc->new("./airrec_logs/" . $dataStruct->getHeader()->{start_time} . "-controller.log-00.log");
@@ -178,7 +197,8 @@ sub resp_display {
 
    # Display Header
    $out = '<font size="-3">';
-   $out .= "Test type: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a><br>\n";
+   $out .= "Test type: " . $dataStruct->getHeader()->{test_type} . "&nbsp;&nbsp;<a href=\"./ap_info?file=" . $filename . "\">AP CONSOLE INFO</a>&nbsp;\n";
+   $out .= '<a href="./airrec?file=' . $filename . '">CONTROLLER LOGS</a><br>';
    $out .= "<table border=0 cellspacing=1 cellpadding=0>\n";
    $out .= "<tr><td>SEC</td>";
    
