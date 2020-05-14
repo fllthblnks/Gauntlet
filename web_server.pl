@@ -49,7 +49,7 @@ sub handle_request {
 
     print 'Written by Guillaume Germain<br><br><br>';
 
-    print '<font color="fushcia">300M</font> denotes a speed (in this case 300Mbps)<br>';
+    print '<font color="fushcia">300M</font> denotes a speed (in this case 300 Mbps)<br>';
     
     print '<font color="aqua">300M</font> denotes a quantity of data (in this case 300 MB)';
  
@@ -123,6 +123,7 @@ sub resp_airrec{
   open(FIC, "./airrec_logs/" . $dataStruct->getHeader()->{start_time} . "-controller.log-00.log");
 
   print 'HTTP/1.0 200 OK\r\n';
+  print "Content-Type: text/plain\n";
   print <FIC>;
 
 }
