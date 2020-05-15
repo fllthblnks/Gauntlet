@@ -354,21 +354,20 @@ sub print_header(){
 		<html>
 		<head>
 		<script>
-		\$('#hoverMe').hover(function () {
-				\$('#tooltip').fadeIn();
-				}, function () {
-				\$('#tooltip').fadeOut();
-				});
-	</script>
-		<title>Gauntlet</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 EOF
+if($refesh ne "autoupdate"){ $out .= '        setTimeout(function(){ location.reload(); },1000); '; }
 
+    $out .= <<EOF;
+    
+		$('#hoverMe').hover(function () {
+				$('#tooltip').fadeIn();
+				}, function () {
+				$('#tooltip').fadeOut();
+				});
+	    </script>
+        <title>Gauntlet</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-		if($refesh ne "autoupdate"){ #$out .= '<META HTTP-EQUIV="refresh" CONTENT="1">';
-		}
-
-	$out .= <<EOF;
 	</head>
 		<body link="#F5821F" vlink="#F5821F" alink="yellow" bgcolor="black" text="white">
 		<font face="arial">
