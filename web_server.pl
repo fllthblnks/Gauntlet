@@ -183,8 +183,11 @@ sub update {
 sub resp_display {
    my $cgi  = shift;   # CGI.pm object
    return if !ref $cgi;
-  
-   &print_header(); 
+
+   my $refresh;
+   if(!defined($cgi->param('file'))){  $refresh = 'autoupdate'; }
+ 
+   &print_header($refresh); 
 
    my $filename, $out;
 
@@ -355,7 +358,7 @@ sub print_header(){
 		<head>
 		<script>
 EOF
-if($refesh ne "autoupdate"){ $out .= '        setTimeout(function(){ location.reload(); },1000); '; }
+if($refresh eq "autoupdate"){ $out .= '        setTimeout(function(){ location.reload(); },1000); '; }
 
     $out .= <<EOF;
     
