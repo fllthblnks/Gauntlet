@@ -3,7 +3,7 @@ echo 'The script will request your sudo password to install the scripts globally
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     xcode-select --install
-
+fi
 
 sudo cpan -I POSIX
 sudo cpan -I IO::Socket::INET
