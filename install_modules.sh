@@ -10,4 +10,5 @@ sudo cpan -I IO::Socket::INET
 sudo cpan -I IO::Select
 sudo cpan -I Time::HiRes
 sudo cpan -I IO::Handle
-
+sudo cpan -I HTTP::Server::Simple::CGI
+sudo cpan -I Math::Round
