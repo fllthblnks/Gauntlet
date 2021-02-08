@@ -2,6 +2,8 @@
 # Author:      Guillaume Germain
 # Description: 
 
+use lib './';
+
 use POSIX;
 use IO::Socket::INET;
 use IO::Select;
